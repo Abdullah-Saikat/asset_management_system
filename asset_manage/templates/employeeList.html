@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+          var value = $(this).val().toLowerCase();
+          $("#myTable tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+          });
+        });
+      });
+    </script>
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td,
+      th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="myInput" type="text" placeholder="Search.." />
+    <br /><br />
+
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Username</th>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        {% for employee in employeeList %}
+        <tr>
+          <td>{{ employee.id }}</td>
+          <td><a href="#">{{ employee.username }}</a></td>
+          <td>{{ employee.first_name }}</td>
+          <td>{{ employee.last_name }}</td>
+          <td>{{ employee.email }}</td>
+          {% comment %}
+          <td>{{ employee.password }}</td>
+          {% endcomment %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,6 +1,9 @@
+from urllib import request
+from xml.dom.minidom import TypeInfo
 from django.shortcuts import render, redirect
 from .forms import AssetForm
 from .models import Asset
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -41,3 +44,7 @@ def destroy(request, id):
     employee = Asset.objects.get(id=id)
     employee.delete()
     return redirect("/asset/show")
+
+def emplyeeList(request):
+    employees = User.objects.all()
+    return render(request,'employeeList.html',{'employeeList':employees})
