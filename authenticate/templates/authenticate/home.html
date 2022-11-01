@@ -1,0 +1,23 @@
+{% extends 'authenticate/side_menu_bar.html' %}
+{#{% extends 'authenticate/side_menu_bar.html' %}#}
+
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+
+<h1>This is the home page</h1>
+
+{% if user.is_authenticated %}
+	
+	<p>Name: {{ user.first_name }} {{ user.last_name }}</p>
+	<p>Username: {{ user.username}}</p>
+	<p>Email: {{ user.email }}</p>
+	
+
+
+</div>
+
+{% endif %}
+
+
+{% endblock %}
