@@ -22,8 +22,13 @@ def emp(request):
 
 
 def show(request):
-    employees = Asset.objects.all()
-    return render(request, "show.html", {'employees': employees})
+    products = Asset.objects.all()
+    # products = employees.order_by('date').values()
+    # print("Product List Unsorted")
+    # print(employees)
+    print("Product List sorted")
+    print(products)
+    return render(request, "show.html", {'employees':products})
 
 
 def edit(request, id):
@@ -48,3 +53,9 @@ def destroy(request, id):
 def emplyeeList(request):
     employees = User.objects.all()
     return render(request,'employeeList.html',{'employeeList':employees})
+
+def maintenanceProducts(request):
+    products = Asset.objects.all().order_by('date').values()
+    print(type(products))
+    count =0
+    return render(request, "maintenanceProducts.html", {'products':products,"count":count})
