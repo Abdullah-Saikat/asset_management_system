@@ -11,3 +11,17 @@ class Asset(models.Model):
     description = models.CharField(max_length=100)
     price = models.IntegerField()
 
+class Assetinfo(models.Model):
+    tag_no = models.IntegerField()
+    ownerID = models.CharField(max_length=20,default='')
+    itemId = models.CharField(max_length=20)
+    entry_date = models.DateField(default=datetime.now)
+    statusID = models.CharField(max_length=20)
+
+
+class Department(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=20,default='')
+    
+
+

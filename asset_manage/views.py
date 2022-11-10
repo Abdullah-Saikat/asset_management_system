@@ -1,7 +1,7 @@
 from urllib import request
 from xml.dom.minidom import TypeInfo
 from django.shortcuts import render, redirect
-from .forms import AssetForm
+from .forms import AssetForm,InfoForm,DepartmentForm
 from .models import Asset
 from django.contrib.auth.models import User
 
@@ -19,6 +19,38 @@ def emp(request):
     else:
         form = AssetForm()
     return render(request, 'index.html', {'form': form})
+
+
+def Assetinfo(request):
+    if request.method == "POST":
+        form = InfoForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                print("Saved")
+                return redirect('/asset/assetinfo')
+            except:
+                print("Saved problem")
+                pass
+    else:
+        form = InfoForm()
+        return render(request, 'assetinfo.html', {'form': form})
+
+def Department(request):
+    if request.method == "POST":
+        form = Department(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                print("Saved")
+                return redirect('/asset/department')
+            except:
+                print("Saved problem")
+                pass
+    else:
+        form = DepartmentForm()
+        return render(request, 'department.html', {'form': form})
+
 
 
 def show(request):
