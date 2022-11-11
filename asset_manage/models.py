@@ -23,5 +23,12 @@ class Department(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=20,default='')
     
-
-
+class Item(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=20,default='')
+    categoryId = models.CharField(max_length=20)
+    
+class Category(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=20,default='')
+    
