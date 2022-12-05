@@ -202,55 +202,154 @@
     <!-- Sidebar  -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>Asset management</h3>
-            
+          <h3>Asset management</h3>
         </div>
-
+  
         <ul class="list-unstyled components">
-            <p></p>
-            <li class="active">
-                <a href="/asset/assetinfo">Asset Info</a>
-                <a href="/asset/department">Department</a>
-                <a href="/asset/item">Item</a>
+          <p></p>
+          <li class="active">
+            <a
+              href="#homeSubmenu"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle"
+              >Asset Entry</a
+            >
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+              <li>
+                <a href="/asset/emp">Add Asset</a>
+              </li>
+  
+              <li>
+                <a href="/asset/show">Asset Issue</a>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a
+              href="#userSubmenu"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle"
+              >Maintenance Schedule</a
+            >
+            <ul class="collapse list-unstyled" id="userSubmenu">
+              <li>
+                <a href="/asset/">Create Schedule</a>
+              </li>
+              <li>
+                <a href="/asset/maintenanceProducts">View Schedule</a>
+              </li>
+              <li>
+                <a href="/asset/department">See History</a>
+              </li>
+            </ul>
+          </li>
+
+
+          <li>
+            <a
+              href="#pageSubmenu"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle"
+              >Basic Settings</a
+            >
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+              <li>
+                
+                <a
+              href="#Assetsubmenu"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle"
+              >Asset Info </a>
+              <ul class="collapse list-unstyled" id="Assetsubmenu">
+                <li>
+                  <a href="/asset/assetinfo">Asset Info</a>
+                </li>
+                <li>
+                  <a href="/asset/assetinfoshow">show Asset Info</a>
+                </li>
+
+              </ul>
+              </li>
+              
+              <a
+              href="#Departmentsubmenu"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle"
+              >Department </a>
+              <ul class="collapse list-unstyled" id="Departmentsubmenu">
+                <li>
+                  <a href="/asset/department">Department</a>
+                </li>
+                <li>
+                  <a href="/asset/departmentshow">Show Department </a>
+                </li>
+              </ul>
+            </li>
+            <a
+            href="#employeeinfosubmenu"
+            data-toggle="collapse"
+            aria-expanded="false"
+            class="dropdown-toggle"
+            >Employee Info </a>
+            <ul class="collapse list-unstyled" id="employeeinfosubmenu">
+              <li>
+                <a href="/asset/employeeinfo">Employee Info</a>
+              </li>
+              <li>
+                <a href="/asset/employeeinfoshow">Show Employee Info </a>
+              </li>
+            </ul>
+          </li>
+              <li>
                 <a href="/asset/category">Category</a>
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Asset</a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>
-                        <a href="/asset/emp">Add Asset</a>
-                    </li>
+              </li>
+              <li>
+                <a href="/asset/item">Item</a>
+              </li>
+              <li>
+                <a href="/asset/assetstatus">Asset Status</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a
+              href="#usersettingSubmenu"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle"
+              >User Settings</a
+            >
+            <ul class="collapse list-unstyled" id="usersettingSubmenu">
+              <li>
+                <a href="/asset/assetinfo">Create User</a>
+              </li>
+              <li>
+                <a href="/asset/department">Delete User</a>
+              </li>
+              <li>
+                <a href="/asset/department">View User</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="/asset/emplyeeList">Emplpoyee List</a>
+          </li>
+          <li>
+            <a href="/admin">Dashboard</a>
+          </li>
+          
 
-                    <li>
-                        <a href="/asset/show">Assets List</a>
-                    </li>
-
-                </ul>
-            </li>
-            <li>
-                <a href="/asset/maintenanceProducts">Maintenance schedule</a>
-            </li>
-            <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li>
-                        <a href="#">Page 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Page 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Page 3</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="/asset/emplyeeList">Emplpoyee List</a>
-            </li>
-            <li>
-                <a href="/admin">Dashboard</a>
-            </li>
+          <li>
+            <a href="">Report</a>
+          </li>
         </ul>
-
-    </nav>
+      </nav>
 
     <!-- Page Content  -->
     <div id="content">
@@ -294,7 +393,7 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                           </li>
-                      {% else %}
+                       {% else %}
                         <li class="nav-item active">
                           <a class="nav-link" href="{% url 'login' %}">Login</a>
                         </li>

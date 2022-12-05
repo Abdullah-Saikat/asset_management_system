@@ -11,24 +11,37 @@ class Asset(models.Model):
     description = models.CharField(max_length=100)
     price = models.IntegerField()
 
+    def __str__(self):
+         return self.title
+
 class Assetinfo(models.Model):
     tag_no = models.IntegerField()
     ownerID = models.CharField(max_length=20,default='')
-    itemId = models.CharField(max_length=20)
+    item_id = models.CharField(max_length=20,default='')
     entry_date = models.DateField(default=datetime.now)
     statusID = models.CharField(max_length=20)
 
 
 class Department(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=20,default='')
+    department_id = models.IntegerField(primary_key=True)
+    department_name = models.CharField(max_length=20,default='')
     
 class Item(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=20,default='')
+    item_id = models.ForeignKey(Assetinfo, on_delete=models.CASCADE)
+    item_name = models.CharField(max_length=20,default='')
     categoryId = models.CharField(max_length=20)
     
 class Category(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=20,default='')
-    
+    category_id = models.IntegerField(primary_key=True)
+    category_name = models.CharField(max_length=20,default='')
+
+class Employeeinfo(models.Model):
+    empolyeeID = models.IntegerField()
+    employeeName = models.CharField(max_length=20,default='')
+    departmentId = models.IntegerField()
+    contact = models.IntegerField()
+    email = models.CharField(max_length=20)
+
+class Assetstatus(models.Model):
+    statusid = models.IntegerField(primary_key=True)
+    statusname = models.CharField(max_length=20,default='')    

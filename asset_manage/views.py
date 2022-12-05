@@ -1,8 +1,8 @@
 from urllib import request
 from xml.dom.minidom import TypeInfo
 from django.shortcuts import render, redirect
-from .forms import AssetForm,InfoForm,DepartmentForm,ItemForm,CategoryForm
-from .models import Asset
+from .forms import AssetForm,InfoForm,DepartmentForm,ItemForm,CategoryForm,EmployeeinfoForm,AssetstatusForm
+from .models import Asset,Assetinfo,Department,Employeeinfo
 from django.contrib.auth.models import User
 
 
@@ -21,7 +21,7 @@ def emp(request):
     return render(request, 'index.html', {'form': form})
 
 
-def Assetinfo(request):
+def Assetinformation(request):
     if request.method == "POST":
         form = InfoForm(request.POST)
         if form.is_valid():
@@ -36,7 +36,7 @@ def Assetinfo(request):
         form = InfoForm()
         return render(request, 'assetinfo.html', {'form': form})
 
-def Department(request):
+def Departmentinformation(request):
     if request.method == "POST":
         form = DepartmentForm(request.POST)
         if form.is_valid():
@@ -73,7 +73,7 @@ def Category(request):
             try:
                 form.save()
                 print("Saved")
-                return redirect('/asset/item')
+                return redirect('/asset/category')
             except:
                 print("Saved problem")
                 pass
@@ -81,6 +81,33 @@ def Category(request):
         form = CategoryForm()
         return render(request, 'category.html', {'form': form})
 
+def Employeeinformation(request):
+    if request.method == "POST":
+        form = EmployeeinfoForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('/asset/employeeinfo')
+            except:
+                pass
+    else:
+        form = EmployeeinfoForm()
+    return render(request, 'employeeinfo.html', {'form': form})
+
+def Assetstatus(request):
+    if request.method == "POST":
+        form = AssetstatusForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                print("Saved")
+                return redirect('/asset/assetstatus')
+            except:
+                print("Saved problem")
+                pass
+    else:
+        form = AssetstatusForm()
+        return render(request, 'assetstatus.html', {'form': form})
 
 
 def show(request):
@@ -121,3 +148,30 @@ def maintenanceProducts(request):
     print(type(products))
     count =0
     return render(request, "maintenanceProducts.html", {'products':products,"count":count})
+def assetinfoshow(request):
+    products = Assetinfo.objects.all()
+    # products = employees.order_by('date').values()
+    # print("Product List Unsorted")
+    # print(employees)
+    print("Product List sorted")
+    print(products)
+    return render(request, "assetinfoshow.html", {'employees':products})
+
+def departmentshow(request):
+    products = Department.objects.all()
+    # products = employees.order_by('date').values()
+    # print("Product List Unsorted")
+    # print(employees)
+    print("Product List sorted")
+    print(products)
+    return render(request, "departmentshow.html", {'employees':products})
+
+def employeeinfoshow(request):
+    products = Employeeinfo.objects.all()
+    # products = employees.order_by('date').values()
+    # print("Product List Unsorted")
+    # print(employees)
+    print("Product List sorted")
+    print(products)
+    return render(request, "employeeinfoshow.html", {'employees':products})
+

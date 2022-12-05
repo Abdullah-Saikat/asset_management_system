@@ -11,27 +11,27 @@
     
 </head>
 <body>
-    <form method="POST" class="post-form" action="/asset/department">
+    <form method="POST" class="post-form" action="/asset/item">
         {% csrf_token %}
         <div class="container">
             <br>
             <div class="form-group row">
                 <label class="col-sm-1 col-form-label"></label>
                 <div class="col-sm-4">
-                <h3>Enter Details</h3>
+                <h3>Enter Item Details</h3>
                 </div>
             </div>
         
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">ID:</label>
                 <div class="col-sm-4">
-                {{ form.id }}
+                {{ form.item_id }}
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Name:</label>
                 <div class="col-sm-4">
-                {{ form.name }}
+                {{ form.item_name }}
                 </div>
             </div>
             <div class="form-group row">
