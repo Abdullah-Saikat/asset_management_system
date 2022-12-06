@@ -2,7 +2,7 @@ from urllib import request
 from xml.dom.minidom import TypeInfo
 from django.shortcuts import render, redirect
 from .forms import AssetForm,InfoForm,DepartmentForm,ItemForm,CategoryForm,EmployeeinfoForm,AssetstatusForm
-from .models import Asset,Assetinfo,Department,Employeeinfo
+from .models import Asset,Assetinfo,Department,Employeeinfo,Category,Item,Assetstatus
 from django.contrib.auth.models import User
 
 
@@ -51,7 +51,7 @@ def Departmentinformation(request):
         form = DepartmentForm()
         return render(request, 'department.html', {'form': form})
 
-def Item(request):
+def Iteminformation(request):
     if request.method == "POST":
         form = ItemForm(request.POST)
         if form.is_valid():
@@ -66,7 +66,7 @@ def Item(request):
         form = ItemForm()
         return render(request, 'item.html', {'form': form})
 
-def Category(request):
+def Categoryinformation(request):
     if request.method == "POST":
         form = CategoryForm(request.POST)
         if form.is_valid():
@@ -94,7 +94,7 @@ def Employeeinformation(request):
         form = EmployeeinfoForm()
     return render(request, 'employeeinfo.html', {'form': form})
 
-def Assetstatus(request):
+def Assetstatusinformation(request):
     if request.method == "POST":
         form = AssetstatusForm(request.POST)
         if form.is_valid():
@@ -175,3 +175,29 @@ def employeeinfoshow(request):
     print(products)
     return render(request, "employeeinfoshow.html", {'employees':products})
 
+def categoryshow(request):
+    products = Category.objects.all()
+    # products = employees.order_by('date').values()
+    # print("Product List Unsorted")
+    # print(employees)
+    print("Product List sorted")
+    print(products)
+    return render(request, "categoryshow.html", {'employees':products})
+
+def itemshow(request):
+    products = Item.objects.all()
+    # products = employees.order_by('date').values()
+    # print("Product List Unsorted")
+    # print(employees)
+    print("Product List sorted")
+    print(products)
+    return render(request, "itemshow.html", {'employees':products})
+
+def assetstatusshow(request):
+    products = Assetstatus.objects.all()
+    # products = employees.order_by('date').values()
+    # print("Product List Unsorted")
+    # print(employees)
+    print("Product List sorted")
+    print(products)
+    return render(request, "assetstatusshow.html", {'employees':products})
