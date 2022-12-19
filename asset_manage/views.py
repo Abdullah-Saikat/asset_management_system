@@ -6,6 +6,7 @@ from .models import Asset,Assetinfo,Department,Employeeinfo,Category,Item,Assets
 from django.contrib.auth.models import User
 
 
+
 # Create your views here.
 def emp(request):
     if request.method == "POST":

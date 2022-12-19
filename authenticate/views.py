@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib import messages 
+from django.contrib.auth.models import User
 from .forms import SignUpForm, EditProfileForm
-
+from .decorators import authentication_not_required
 def home(request):
 	return render(request, 'authenticate/home.html', {})
 
@@ -15,6 +16,7 @@ def login_user(request):
 		if user is not None:
 			login(request, user)
 			messages.success(request, ('You Have Been Logged In!'))
+		
 			return redirect('home')
 		else:
 			messages.success(request, ('Error Logging In - Please Try Again...'))
@@ -30,21 +32,35 @@ def logout_user(request):
 def register_user(request):
 	if request.method == 'POST':
 		form = SignUpForm(request.POST)
+		user_type=request.POST.get("type_of_user")
+		print(user_type)
 		if form.is_valid():
-			form.save()
+			
+			user = form.save(commit=False)
+			
+			if user_type== 'Admin':
+				print("kichu ekta") 
+				user.is_superuser=True
+			elif user_type=='Stuff':
+				print("Stuff")
+				user.is_staff=True
+			
+			user.save()
+			print(user.is_staff)
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password1']
 			user = authenticate(username=username, password=password)
+
 			login(request, user)
 			messages.success(request, ('You Have Registered...'))
-			return redirect('home')
+			return redirect('/')
 	else:
 		form = SignUpForm()
 	
 	context = {'form': form}
 	return render(request, 'authenticate/register.html', context)
 
-
+@authentication_not_required
 def edit_profile(request):
 	if request.method == 'POST':
 		form = EditProfileForm(request.POST, instance=request.user)
@@ -75,3 +91,6 @@ def change_password(request):
 
 def asset(request):
 	return render(request, 'authenticate/add_asset.html')
+
+def staffdashboard(request):
+	return render(request, 'authenticate/userdashboard.html')

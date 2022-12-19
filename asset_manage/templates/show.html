@@ -1,7 +1,14 @@
 {% extends 'authenticate/side_menu_bar.html' %}
 {% block content %}
 <div class="container">
-
+<!-- {% if request.user.is_staff %}
+<li><a href="/logout">Log Out</a></li>
+{% else %}
+<li><a href="/login">Log In</a></li>
+{% endif %} -->
+<!-- {%
+print("staff") if (request.user.is_staff ) else print("not staff")
+%} -->
 <table class="table table-striped table-bordered table-sm">
     <thead class="thead-dark">
     <tr>

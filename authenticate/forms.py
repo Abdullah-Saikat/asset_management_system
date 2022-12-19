@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django import forms
 
+
 class EditProfileForm(UserChangeForm):
 	password = forms.CharField(label="",  widget=forms.TextInput(attrs={'type':'hidden'}))
 	class Meta:
@@ -22,10 +23,12 @@ class SignUpForm(UserCreationForm):
 	)
 	Depertment = forms.CharField(widget=forms.Select(choices=CHOICES))
 	
-	
+	user_type =(("Admin","Admin"),("Staff","Staff"))
+
+	type_of_user = forms.CharField(widget=forms.Select(choices=user_type))
 	class Meta:
 		model = User
-		fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2',)
+		fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2','Depertment','type_of_user', 'is_staff')
 
 	def __init__(self, *args, **kwargs):
 	    super(SignUpForm, self).__init__(*args, **kwargs)
@@ -44,3 +47,5 @@ class SignUpForm(UserCreationForm):
 	    self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
 	    self.fields['password2'].label = ''
 	    self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
+
+
