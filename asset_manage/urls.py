@@ -20,5 +20,6 @@ urlpatterns = [
     path('update/<int:id>', views.update),
     path('delete/<int:id>', views.destroy),
     path('emplyeeList',views.emplyeeList),
-    path('maintenanceProducts',views.maintenanceProducts)
+    path('maintenanceProducts',views.maintenanceProducts),
+    path('staff/', views.staffdashboard, name='staff'),
 ]

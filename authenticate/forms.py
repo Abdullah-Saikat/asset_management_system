@@ -23,12 +23,12 @@ class SignUpForm(UserCreationForm):
 	)
 	Depertment = forms.CharField(widget=forms.Select(choices=CHOICES))
 	
-	user_type =(("Admin","Admin"),("Staff","Staff"))
+	# user_type =(("Admin","Admin"),("Staff","Staff"))
 
-	type_of_user = forms.CharField(widget=forms.Select(choices=user_type))
+	# type_of_user = forms.CharField(widget=forms.Select(choices=user_type))
 	class Meta:
 		model = User
-		fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2','Depertment','type_of_user', 'is_staff')
+		fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2','Depertment', 'is_staff')
 
 	def __init__(self, *args, **kwargs):
 	    super(SignUpForm, self).__init__(*args, **kwargs)

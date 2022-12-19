@@ -202,3 +202,10 @@ def assetstatusshow(request):
     print("Product List sorted")
     print(products)
     return render(request, "assetstatusshow.html", {'employees':products})
+
+def staffdashboard(request):
+    emp_id = request.user.id
+    print(emp_id)
+    emp_Info = Asset.objects.filter(owner_id=emp_id).values()
+    print(emp_Info)
+    return render(request,'employeedashboard.html', {'emploo':emp_Info})

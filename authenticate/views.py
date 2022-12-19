@@ -14,9 +14,13 @@ def login_user(request):
 		password = request.POST['password']
 		user = authenticate(request, username=username, password=password)
 		if user is not None:
+			emptype=user.is_staff
+			print(emptype)
 			login(request, user)
 			messages.success(request, ('You Have Been Logged In!'))
-		
+			if emptype==True:
+				return redirect('asset/staff')
+		    
 			return redirect('home')
 		else:
 			messages.success(request, ('Error Logging In - Please Try Again...'))
@@ -92,5 +96,3 @@ def change_password(request):
 def asset(request):
 	return render(request, 'authenticate/add_asset.html')
 
-def staffdashboard(request):
-	return render(request, 'authenticate/userdashboard.html')
