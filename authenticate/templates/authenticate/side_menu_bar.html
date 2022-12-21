@@ -198,7 +198,13 @@
 </head>
 
 <body>
+
 <div class="wrapper">
+  {% if request.user.is_staff %}
+  
+    {% else %}
+    
+    
     <!-- Sidebar  -->
     <nav id="sidebar">
         <div class="sidebar-header">
@@ -267,7 +273,7 @@
               >Asset Info </a>
               <ul class="collapse list-unstyled" id="Assetsubmenu">
                 <li>
-                  <a href="/asset/assetinfo">Asset Info</a>
+                  <a href="/asset/assetinfo">Add Asset Info</a>
                 </li>
                 <li>
                   <a href="/asset/assetinfoshow">show Asset Info</a>
@@ -284,7 +290,7 @@
               >Department </a>
               <ul class="collapse list-unstyled" id="Departmentsubmenu">
                 <li>
-                  <a href="/asset/department">Department</a>
+                  <a href="/asset/department">Add Department</a>
                 </li>
                 <li>
                   <a href="/asset/departmentshow">Show Department </a>
@@ -299,7 +305,7 @@
             >Employee Info </a>
             <ul class="collapse list-unstyled" id="employeeinfosubmenu">
               <li>
-                <a href="/asset/employeeinfo">Employee Info</a>
+                <a href="/asset/employeeinfo">Add Employee Info</a>
               </li>
               <li>
                 <a href="/asset/employeeinfoshow">Show Employee Info </a>
@@ -314,7 +320,7 @@
           >Category </a>
           <ul class="collapse list-unstyled" id="categorysubmenu">
             <li>
-              <a href="/asset/category">Category</a>
+              <a href="/asset/category">Add Category</a>
             </li>
            <li>
               <a href="/asset/categoryshow">Show Category </a>
@@ -329,7 +335,7 @@
         >Item </a>
         <ul class="collapse list-unstyled" id="Itemsubmenu">
           <li>
-            <a href="/asset/item">Item</a>
+            <a href="/asset/item">Add Item</a>
           </li>
          <li>
             <a href="/asset/itemshow">Show Item </a>
@@ -344,7 +350,7 @@
       >Asset Status </a>
       <ul class="collapse list-unstyled" id="assetstatussubmenu">
         <li>
-          <a href="/asset/assetstatus">Asset Status</a>
+          <a href="/asset/assetstatus">Add Asset Status</a>
         </li>
        <li>
           <a href="/asset/assetstatusshow">Show Asset Status </a>
@@ -366,10 +372,10 @@
                 <a href="/register">Create User</a>
               </li>
               <li>
-                <a href="/asset/">Delete User</a>
+                <a href="/asset/"></a>
               </li>
               <li>
-                <a href="/asset/">View User</a>
+                <a href="/asset/"></a>
               </li>
             </ul>
           </li>
@@ -385,18 +391,24 @@
             <a href="">Report</a>
           </li>
         </ul>
+
       </nav>
+      {% endif %}
 
     <!-- Page Content  -->
     <div id="content">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
+              {% if request.user.is_staff %}
+              <a class="navbar-brand" href="#">Staff Dashboard</a>
+              {% else %}
 
                 <button type="button" id="sidebarCollapse" class="btn btn-info">
                     <i class="fas fa-align-left"></i>
-                    <!-- <span>Toggle Sidebar</span> -->
+                  
                 </button>
+                {% endif %}
                 <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -441,6 +453,7 @@
                 </div>
             </div>
         </nav>
+        
         {% block content %}
         {% endblock %}
        

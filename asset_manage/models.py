@@ -3,6 +3,7 @@ from email.policy import default
 from django.db import models
 from django.utils.timezone import now
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import ArrayField
 
 
 
@@ -17,11 +18,12 @@ class Asset(models.Model):
          return self.title
 
 class Assetinfo(models.Model):
-    tag_no = models.IntegerField()
+    tag_no = ArrayField(ArrayField(models.IntegerField()))
     ownerID = models.CharField(max_length=20,default='')
     item_id = models.CharField(max_length=20,default='')
     entry_date = models.DateField(default=datetime.now)
     statusID = models.CharField(max_length=20)
+
     def __str__(self):
         return self.item_id
 
@@ -40,7 +42,7 @@ class Category(models.Model):
 
 class Employeeinfo(models.Model):
     empolyeeID = models.IntegerField()
-    employeeName = models.CharField(max_length=20,default='')
+    employeeName = models.ForeignKey(User, on_delete=models.CASCADE)
     departmentId = models.IntegerField()
     contact = models.IntegerField()
     email = models.CharField(max_length=20)

@@ -64,7 +64,7 @@ def register_user(request):
 	context = {'form': form}
 	return render(request, 'authenticate/register.html', context)
 
-@authentication_not_required
+# @authentication_not_required
 def edit_profile(request):
 	if request.method == 'POST':
 		form = EditProfileForm(request.POST, instance=request.user)
