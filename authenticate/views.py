@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import SignUpForm, EditProfileForm
 from .decorators import authentication_not_required
+from .models import Usertype
 def home(request):
 	return render(request, 'authenticate/home.html', {})
 
@@ -13,9 +14,10 @@ def login_user(request):
 		username = request.POST['username']
 		password = request.POST['password']
 		user = authenticate(request, username=username, password=password)
+
 		if user is not None:
 			emptype=user.is_staff
-			print(emptype)
+			print(Usertype.user)
 			login(request, user)
 			messages.success(request, ('You Have Been Logged In!'))
 			if emptype==True:
@@ -42,14 +44,8 @@ def register_user(request):
 			
 			user = form.save(commit=False)
 			
-			if user_type== 'Admin':
-				print("kichu ekta") 
-				user.is_superuser=True
-			elif user_type=='Stuff':
-				print("Stuff")
-				user.is_staff=True
-			
 			user.save()
+			Usertype.objects.create(user=user, user_type=user_type)
 			print(user.is_staff)
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password1']

@@ -1,6 +1,7 @@
 import functools
 from django.shortcuts import redirect
 from django.contrib import messages
+from .models import Usertype
 
 def authentication_not_required(view_func, redirect_url="accounts:profile"):
 
@@ -12,7 +13,8 @@ def authentication_not_required(view_func, redirect_url="accounts:profile"):
     @functools.wraps(view_func)
     def wrapper(request, *args, **kwargs):
         print (request.user.is_superuser)
-        if  request.user.is_superuser:
+        user_type=Usertype.objects.get(user=request.user)
+        if  user_type.user_type=='Admin':
             return view_func(request,*args, **kwargs)
         messages.info(request, "You need to be logged out")
         print("You need to be logged out")

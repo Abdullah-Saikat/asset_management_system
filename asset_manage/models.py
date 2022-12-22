@@ -45,7 +45,6 @@ class Employeeinfo(models.Model):
     employeeName = models.ForeignKey(User, on_delete=models.CASCADE)
     departmentId = models.IntegerField()
     contact = models.IntegerField()
-    email = models.CharField(max_length=20)
 
 class Assetstatus(models.Model):
     statusid = models.IntegerField(primary_key=True)
