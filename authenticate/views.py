@@ -10,6 +10,7 @@ def home(request):
 	return render(request, 'authenticate/home.html', {})
 
 def login_user(request):
+	
 	if request.method == 'POST':
 		username = request.POST['username']
 		password = request.POST['password']
@@ -20,10 +21,13 @@ def login_user(request):
 			print(Usertype.user)
 			login(request, user)
 			messages.success(request, ('You Have Been Logged In!'))
-			if emptype==True:
-				return redirect('asset/staff')
+			user_type=Usertype.objects.get(user=user)
+			if  user_type.user_type=='Store_man':
+				return redirect('home')
+            	
+			return redirect('asset/staff')
 		    
-			return redirect('home')
+			# return redirect('home')
 		else:
 			messages.success(request, ('Error Logging In - Please Try Again...'))
 			return redirect('login')
@@ -60,7 +64,7 @@ def register_user(request):
 	context = {'form': form}
 	return render(request, 'authenticate/register.html', context)
 
-# @authentication_not_required
+
 def edit_profile(request):
 	if request.method == 'POST':
 		form = EditProfileForm(request.POST, instance=request.user)

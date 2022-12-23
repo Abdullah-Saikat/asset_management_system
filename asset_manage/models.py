@@ -13,13 +13,14 @@ class Asset(models.Model):
     date = models.DateField(default=datetime.now)
     description = models.CharField(max_length=100)
     price = models.IntegerField()
+    asset_quantity = models.IntegerField(default=1)
 
     def __str__(self):
          return self.title
 
 class Assetinfo(models.Model):
-    tag_no = ArrayField(ArrayField(models.IntegerField()))
-    ownerID = models.CharField(max_length=20,default='')
+    tag_no = models.ForeignKey(Asset, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
     item_id = models.CharField(max_length=20,default='')
     entry_date = models.DateField(default=datetime.now)
     statusID = models.CharField(max_length=20)

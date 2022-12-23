@@ -18,5 +18,7 @@ def authentication_not_required(view_func, redirect_url="accounts:profile"):
             return view_func(request,*args, **kwargs)
         messages.info(request, "You need to be logged out")
         print("You need to be logged out")
-        return redirect(redirect_url)
+        if  user_type.user_type=='Store_man':
+            return redirect('home')
+        return redirect('home')
     return wrapper

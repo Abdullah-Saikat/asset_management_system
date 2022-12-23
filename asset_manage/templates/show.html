@@ -11,8 +11,9 @@
         <th>Owner</th>
         <th>Description</th>
         <th>Price</th>
-        <th>Expiry Date</th>
-        {% if request.user.is_staff %}
+        <th>Quantity</th>
+        <th>Maintenance Date</th>
+        {% if request.user.is_taff %}
         {% else %}
         <th>Actions</th>
         {% endif %}
@@ -27,9 +28,10 @@
         <td>{{ employee.owner }}</td>
         <td>{{ employee.description }}</td>
         <td>{{ employee.price }}</td>
+        <td>{{ employee.asset_quantity }}</td>
         <td>{{ employee.date }}</td>
         
-        {% if request.user.is_staff %}
+        {% if request.user.is_taff %}
         {% else %}
         <td>
             <a href="/asset/edit/{{ employee.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
@@ -43,7 +45,7 @@
 </table>
 <br>
 <br>
-{% if request.user.is_staff %}
+{% if request.user.is_taff %}
 {% else %}
 <center><a href="/asset/emp" class="btn btn-primary">Add New Record</a></center>
 {% endif %}

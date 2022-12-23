@@ -209,3 +209,32 @@ def staffdashboard(request):
     emp_Info = Asset.objects.filter(owner_id=emp_id).values()
     print(emp_Info)
     return render(request,'employeedashboard.html', {'emploo':emp_Info})
+
+def Totalasset(request):
+    report_val=None
+    distinct_option=None
+    if request.method == "POST":
+        report_val=request.POST.get('searchtype')
+        distinct_option=Asset.objects.filter(title=report_val).count()
+
+        print(distinct_option)
+        return render(request, 'totalassetreport.html', {'reports':report_val,'reportscount':distinct_option})
+    # print(distinct_option)
+    
+    return render(request, 'totalassetreport.html', {'reports':report_val,'reportscount':distinct_option})
+
+def Employeewisereport(request):
+    # distinct_opt=Asset.objects.filter(owner=1).count()
+    # print(distinct_opt)
+    wise_report={}
+    for x in User.objects.all():
+        distinct_opt=Asset.objects.filter(owner=x.id).count()
+        wise_report[x.username]=distinct_opt
+        
+        print(x.id)
+        print(x.username)
+    print(wise_report)
+    print(len(wise_report))
+    
+    return render(request, 'employeewisereport.html',{'wisereports':wise_report})
+    

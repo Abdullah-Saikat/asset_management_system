@@ -1,0 +1,32 @@
+{% extends 'authenticate/side_menu_bar.html' %}
+{% block content %}
+<div class="container">
+  <form action="/asset/totalasset" method="POST">
+    {% csrf_token %}
+    <select name= "searchtype"class="form-select" aria-label="Default select example">
+    <option selected>Open this select menu</option>
+    <option value="keyboard">keyboard</option>
+    <option value="mouse">mouse</option>
+    <option value="monitor">monitor</option>
+    <option value="chair">chair</option>
+    <option value="table">table</option>
+    <option value="antivirous">antivirous</option>
+    <option value="bag">bag</option>
+    <option value="harddisk">harddisk</option>
+    <option value="pendrive">pendrive</option>
+  </select> 
+  <br>
+  <br>
+  <button class=" btn btn-success">search</button></form>
+<br>
+<br>
+
+    <span>
+        {{reports}}
+
+    </span>
+    <span>:{{reportscount}}</span>
+ 
+
+</div>
+{% endblock %}
