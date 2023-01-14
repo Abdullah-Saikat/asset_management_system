@@ -200,9 +200,9 @@
 <body>
 
 <div class="wrapper">
-  {% if request.user.is_staff %}
+  <!-- {% if request.user.is_staff %}
   
-    {% else %}
+    {% else %} -->
     
     
     <!-- Sidebar  -->
@@ -359,16 +359,19 @@
     </li>
             </ul>
           </li>
-          
+          {% if request.user.usertype.user_type == "Admin" %}
+                
+              
           <li>
             <a
               href="#usersettingSubmenu"
               data-toggle="collapse"
               aria-expanded="false"
               class="dropdown-toggle"
-              >User Setting</a
+              >User setting</a
             >
             <ul class="collapse list-unstyled" id="usersettingSubmenu">
+              
               <li>
                 <a href="/register">Create User</a>
               </li>
@@ -381,13 +384,17 @@
             </ul>
           </li>
           
+          
+          
+        <li>
+          <a href="/admin">Admin panel</a>
+        </li>
+          
+          {% endif %}
+
           <li>
             <a href="/asset/emplyeeList">Emplpoyee List</a>
           </li>
-          <li>
-            <a href="/admin">Admin panel</a>
-          </li>
-         
 
           <a
           href="#reportSubmenu"
@@ -413,22 +420,22 @@
         </ul>
 
       </nav>
-      {% endif %}
+      <!-- {% endif %} -->
 
     <!-- Page Content  -->
     <div id="content">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-              {% if request.user.is_staff %}
-              <a class="navbar-brand" href="#">Staff Dashboard</a>
-              {% else %}
+              <!-- {% if request.user.is_staff %} -->
+              <!-- <a class="navbar-brand" href="#">Staff Dashboard</a>
+              {% else %} -->
 
                 <button type="button" id="sidebarCollapse" class="btn btn-info">
                     <i class="fas fa-align-left"></i>
                   
                 </button>
-                {% endif %}
+                <!-- {% endif %} -->
                 <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">

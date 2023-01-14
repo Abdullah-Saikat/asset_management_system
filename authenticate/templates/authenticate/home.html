@@ -4,9 +4,12 @@
 {% block content %}
 
 <div class="col-md-6 offset-md-3">
+{% if request.user.usertype.user_type == "Admin" %}
 
-<h1>This is the home page</h1>
-
+<h1>This is the Admin Dashboard</h1>
+{%else%}
+<h1>This is the Storeman Dashboard</h1>
+{%endif%}
 {% if user.is_authenticated %}
 	
 	<p>Name: {{ user.first_name }} {{ user.last_name }}</p>

@@ -13,9 +13,11 @@
         <th>Price</th>
         <th>Quantity</th>
         <th>Maintenance Date</th>
-        {% if request.user.is_taff %}
-        {% else %}
+        <th>Status</th>
+        {% if request.user.usertype.user_type == "Admin" %}
         <th>Actions</th>
+        {% else %}
+        
         {% endif %}
         
     </tr>
@@ -30,14 +32,29 @@
         <td>{{ employee.price }}</td>
         <td>{{ employee.asset_quantity }}</td>
         <td>{{ employee.date }}</td>
+        {% if employee.status == False %}
+            {% if request.user.usertype.user_type == "Admin" %}
+            <td><a class="btn btn-primary" href="update_status/{{ employee.id }}"> Confirm</a></td>
+            {% else %}
+            <td> Not approved</td>
+            {% endif %}
         
-        {% if request.user.is_taff %}
         {% else %}
+        <td>approved</td>
+        {% endif %}
+        
+
+        
+        
+        {% if request.user.usertype.user_type == "Admin" %}
         <td>
             <a href="/asset/edit/{{ employee.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
             <a href="/asset/delete/{{ employee.id }}">Delete</a>
 
         </td>
+        {% else %}
+        
+        
         {% endif %}
     </tr>
 {% endfor %}

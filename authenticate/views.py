@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm, Password
 from django.contrib import messages 
 from django.contrib.auth.models import User
 from .forms import SignUpForm, EditProfileForm
+from asset_manage.forms import AssetrequestForm
 from .decorators import authentication_not_required
 from .models import Usertype
 def home(request):
@@ -23,6 +24,8 @@ def login_user(request):
 			messages.success(request, ('You Have Been Logged In!'))
 			user_type=Usertype.objects.get(user=user)
 			if  user_type.user_type=='Store_man':
+				return redirect('home')
+			elif  user_type.user_type=='Admin':
 				return redirect('home')
             	
 			return redirect('asset/staff')
@@ -95,4 +98,12 @@ def change_password(request):
 
 def asset(request):
 	return render(request, 'authenticate/add_asset.html')
+
+def Request(request):
+	if request.method=='POST':
+		form=AssetrequestForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect("/requestasset")
+	return render(request, 'requestassetform.html')
 

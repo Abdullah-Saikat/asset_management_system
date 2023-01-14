@@ -14,6 +14,7 @@ class Asset(models.Model):
     description = models.CharField(max_length=100)
     price = models.IntegerField()
     asset_quantity = models.IntegerField(default=1)
+    status=models.BooleanField(default=False)
 
     def __str__(self):
          return self.title
@@ -50,3 +51,9 @@ class Employeeinfo(models.Model):
 class Assetstatus(models.Model):
     statusid = models.IntegerField(primary_key=True)
     statusname = models.CharField(max_length=20,default='')    
+
+class Assetrequest(models.Model):
+    asset_name= models.ForeignKey(Asset, on_delete=models.CASCADE,default='')
+    request_quantity= models.IntegerField(default=0)
+    User_id=models.CharField(max_length=30,default='')
+    

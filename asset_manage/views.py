@@ -128,9 +128,12 @@ def edit(request, id):
 
 def update(request, id):
     employee = Asset.objects.get(id=id)
-    form = AssetForm(request.POST, instance=employee)
-    if form.is_valid():
-        form.save()
+    if request.POST:
+        title= request.POST.get('title')
+        description= request.POST.get('description')
+        price= request.POST.get('price')
+        quantity= request.POST.get('quantity')
+        Asset.objects.filter(id=id).update(title=title,description=description,price=price,asset_quantity=quantity)
         return redirect("/asset/show")
     return render(request, 'edit.html', {'employee': employee})
 
@@ -237,4 +240,10 @@ def Employeewisereport(request):
     print(len(wise_report))
     
     return render(request, 'employeewisereport.html',{'wisereports':wise_report})
-    
+
+def Update_status(request, id):
+    employee = Asset.objects.get(id=id)
+    employee.status=True
+    employee.save()
+    print(employee.status)
+    return redirect("/asset/show")

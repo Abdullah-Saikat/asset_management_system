@@ -1,5 +1,5 @@
 from django import forms
-from .models import Asset,Assetinfo,Department,Item,Category,Employeeinfo,Assetstatus
+from .models import Asset,Assetinfo,Department,Item,Category,Employeeinfo,Assetstatus,Assetrequest
 
 
 class AssetForm(forms.ModelForm):
@@ -35,4 +35,9 @@ class EmployeeinfoForm(forms.ModelForm):
 class AssetstatusForm(forms.ModelForm):
     class Meta:
         model = Assetstatus
+        fields = "__all__"
+
+class AssetrequestForm(forms.ModelForm):
+    class Meta:
+        model = Assetrequest
         fields = "__all__"

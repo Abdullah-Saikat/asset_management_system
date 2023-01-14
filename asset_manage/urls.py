@@ -24,4 +24,7 @@ urlpatterns = [
     path('staff/', views.staffdashboard, name='staff'),
     path('totalasset',views.Totalasset),
     path('employeewisereport',views.Employeewisereport),
+    path('update_status/<int:id>', views.Update_status),
+
+    
 ]
