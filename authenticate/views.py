@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.shortcuts import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib import messages 
@@ -7,6 +8,7 @@ from .forms import SignUpForm, EditProfileForm
 from asset_manage.forms import AssetrequestForm
 from .decorators import authentication_not_required
 from .models import Usertype
+
 def home(request):
 	return render(request, 'authenticate/home.html', {})
 
@@ -100,10 +102,21 @@ def asset(request):
 	return render(request, 'authenticate/add_asset.html')
 
 def Request(request):
-	if request.method=='POST':
-		form=AssetrequestForm(request.POST)
-		if form.is_valid():
-			form.save()
-			return redirect("/requestasset")
-	return render(request, 'requestassetform.html')
-
+    if request.method == "POST":
+        form = AssetrequestForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                print("Saved")
+                return redirect('/requestasset')
+            except Exception as e:
+                print(e)
+                messages.error(request, 'Error: Form not saved')
+                return redirect('/requestasset')
+        else:
+            messages.error(request, 'Error: Form not valid')
+            return redirect('/requestasset')
+    else:
+        form = AssetrequestForm()
+        return render(request, 'requestassetform.html', {'form': form})
+		

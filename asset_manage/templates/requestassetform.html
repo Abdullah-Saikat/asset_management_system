@@ -115,11 +115,13 @@
       {% csrf_token %}
       <div class="form-group">
           <label for="title">Asset Title</label>
-          <input type="text" class="form-control" id="title" name="title" required>
+          {{form.asset_name}}
+          <!-- <input type="text" class="form-control" id="title" name="asset_name" required> -->
       </div>
       <div class="form-group">
           <label for="quantity">Quantity</label>
-          <input type="number" class="form-control" id="quantity" name="quantity" required>
+          {{form.request_quantity}}
+          <!-- <input type="number" class="form-control" id="quantity" name="request_quantity" required> -->
       </div>
       <input type="hidden" name="username" value="{{ user.username }}">
       <button type="submit" class="btn btn-primary mt-3">Submit</button>

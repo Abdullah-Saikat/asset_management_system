@@ -41,3 +41,9 @@ class AssetrequestForm(forms.ModelForm):
     class Meta:
         model = Assetrequest
         fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+	    super(AssetrequestForm, self).__init__(*args, **kwargs)
+
+	    self.fields['asset_name'].widget.attrs['class'] = 'form-control'
+	    self.fields['request_quantity'].widget.attrs['class'] = 'form-control'

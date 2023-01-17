@@ -55,5 +55,5 @@ class Assetstatus(models.Model):
 class Assetrequest(models.Model):
     asset_name= models.ForeignKey(Asset, on_delete=models.CASCADE,default='')
     request_quantity= models.IntegerField(default=0)
-    User_id=models.CharField(max_length=30,default='')
+    User_id=models.ForeignKey(User, on_delete=models.CASCADE)
     

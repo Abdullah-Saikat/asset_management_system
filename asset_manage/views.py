@@ -247,3 +247,5 @@ def Update_status(request, id):
     employee.save()
     print(employee.status)
     return redirect("/asset/show")
+
+
