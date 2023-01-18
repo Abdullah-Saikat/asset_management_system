@@ -11,11 +11,24 @@ from django.contrib.auth.models import User
 def emp(request):
     if request.method == "POST":
         form = AssetForm(request.POST)
+        title = request.POST['title']
+        asset_quantity = int(request.POST['asset_quantity'])
+        asset_id=Asset.objects.filter(title=title).first()
         if form.is_valid():
             try:
+               
+                asset = Assetinfo.objects.filter(tag_no=asset_id.id).first()
+                print(asset)
+                print(asset.quantity)
+                if asset:
+                    
+                    asset.quantity -= asset_quantity
+                    asset.save()
+                
                 form.save()
                 return redirect('/asset/show')
             except:
+               
                 pass
     else:
         form = AssetForm()
@@ -25,9 +38,17 @@ def emp(request):
 def Assetinformation(request):
     if request.method == "POST":
         form = InfoForm(request.POST)
+        tag_no = request.POST['tag_no']
+        quantity = int(request.POST['quantity'])
+        
         if form.is_valid():
             try:
-                form.save()
+                asset=Assetinfo.objects.filter(tag_no=tag_no).first()
+                if asset:
+                    asset.quantity += quantity
+                    asset.save()
+                else:
+                    form.save()
                 print("Saved")
                 return redirect('/asset/assetinfo')
             except:
@@ -229,17 +250,10 @@ def Totalasset(request):
 def Employeewisereport(request):
     # distinct_opt=Asset.objects.filter(owner=1).count()
     # print(distinct_opt)
-    wise_report={}
-    for x in User.objects.all():
-        distinct_opt=Asset.objects.filter(owner=x.id).count()
-        wise_report[x.username]=distinct_opt
-        
-        print(x.id)
-        print(x.username)
-    print(wise_report)
-    print(len(wise_report))
+    wise_report = {x.username: {'distinct_opt': Asset.objects.filter(owner=x.id).count(), 'asset_name': list(Asset.objects.filter(owner=x.id).values_list('title', flat=True))} for x in User.objects.all()}
+    return render(request, 'employeewisereport.html', {'wise_report': wise_report})
     
-    return render(request, 'employeewisereport.html',{'wisereports':wise_report})
+    
 
 def Update_status(request, id):
     employee = Asset.objects.get(id=id)
@@ -247,5 +261,4 @@ def Update_status(request, id):
     employee.save()
     print(employee.status)
     return redirect("/asset/show")
-
 
