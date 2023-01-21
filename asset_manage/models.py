@@ -55,5 +55,10 @@ class Assetstatus(models.Model):
 class Assetrequest(models.Model):
     asset_name= models.ForeignKey(Asset, on_delete=models.CASCADE,default='')
     request_quantity= models.IntegerField(default=0)
-    User_id=models.ForeignKey(User, on_delete=models.CASCADE)
+    # User_id=models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Maintenancerequest(models.Model):
+    Maintenance_name= models.ForeignKey(Asset, on_delete=models.CASCADE,default='')
+    user_name= models.ForeignKey(User, on_delete=models.CASCADE)
+
     

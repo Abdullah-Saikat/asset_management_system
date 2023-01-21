@@ -1,5 +1,5 @@
 from django import forms
-from .models import Asset,Assetinfo,Department,Item,Category,Employeeinfo,Assetstatus,Assetrequest
+from .models import Asset,Assetinfo,Department,Item,Category,Employeeinfo,Assetstatus,Assetrequest,Maintenancerequest
 
 
 class AssetForm(forms.ModelForm):
@@ -42,8 +42,13 @@ class AssetrequestForm(forms.ModelForm):
         model = Assetrequest
         fields = "__all__"
 
-    def __init__(self, *args, **kwargs):
-	    super(AssetrequestForm, self).__init__(*args, **kwargs)
+    # def __init__(self, *args, **kwargs):
+	#     super(AssetrequestForm, self).__init__(*args, **kwargs)
 
-	    self.fields['asset_name'].widget.attrs['class'] = 'form-control'
-	    self.fields['request_quantity'].widget.attrs['class'] = 'form-control'
+	#     self.fields['asset_name'].widget.attrs['class'] = 'form-control'
+	#     self.fields['request_quantity'].widget.attrs['class'] = 'form-control'
+
+class MaintenancerequestForm(forms.ModelForm):
+    class Meta:
+        model = Maintenancerequest
+        fields = "__all__"

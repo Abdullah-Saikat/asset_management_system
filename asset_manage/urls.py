@@ -25,6 +25,8 @@ urlpatterns = [
     path('totalasset',views.Totalasset),
     path('employeewisereport',views.Employeewisereport),
     path('update_status/<int:id>', views.Update_status),
+    path('maintenancerequest/',views.maintenancerequest, name='maintenancerequest'),
+    path('maintenanceshow',views.maintenanceshow),
 
     
 ]

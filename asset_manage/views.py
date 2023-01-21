@@ -1,8 +1,8 @@
 from urllib import request
 from xml.dom.minidom import TypeInfo
 from django.shortcuts import render, redirect
-from .forms import AssetForm,InfoForm,DepartmentForm,ItemForm,CategoryForm,EmployeeinfoForm,AssetstatusForm
-from .models import Asset,Assetinfo,Department,Employeeinfo,Category,Item,Assetstatus
+from .forms import AssetForm,InfoForm,DepartmentForm,ItemForm,CategoryForm,EmployeeinfoForm,AssetstatusForm,MaintenancerequestForm
+from .models import Asset,Assetinfo,Department,Employeeinfo,Category,Item,Assetstatus,Maintenancerequest
 from django.contrib.auth.models import User
 
 
@@ -262,3 +262,28 @@ def Update_status(request, id):
     print(employee.status)
     return redirect("/asset/show")
 
+def maintenancerequest(request):
+    if request.method == "POST":
+        form = MaintenancerequestForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                print("Saved")
+                return redirect('/asset/maintenancerequest')
+            except:
+                print("Saved problem")
+                pass
+        else:
+            print(form.errors)
+    else:
+        form = MaintenancerequestForm()
+        return render(request, 'maintenancerequest.html', {'form': form})
+
+def maintenanceshow(request):
+    products = Maintenancerequest.objects.all()
+    # products = employees.order_by('date').values()
+    # print("Product List Unsorted")
+    # print(employees)
+    print("Product List sorted")
+    print(products)
+    return render(request, "showmaintenancereq.html", {'employees':products})

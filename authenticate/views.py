@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import SignUpForm, EditProfileForm
 from asset_manage.forms import AssetrequestForm
+from asset_manage.models import Assetrequest,Asset
 from .decorators import authentication_not_required
 from .models import Usertype
 
@@ -101,16 +102,19 @@ def change_password(request):
 def asset(request):
 	return render(request, 'authenticate/add_asset.html')
 
+
 def Request(request):
     if request.method == "POST":
         form = AssetrequestForm(request.POST)
         if form.is_valid():
+            asset_name = form.cleaned_data['asset_name']
+            request_quantity = form.cleaned_data['request_quantity']
             try:
-                form.save()
+                Assetrequest.objects.create(asset_name_id=asset_name, request_quantity=request_quantity, user_id=request.user)
                 print("Saved")
                 return redirect('/requestasset')
             except Exception as e:
-                print(e)
+                print("error ",e)
                 messages.error(request, 'Error: Form not saved')
                 return redirect('/requestasset')
         else:
