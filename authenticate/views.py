@@ -103,24 +103,7 @@ def asset(request):
 	return render(request, 'authenticate/add_asset.html')
 
 
-def Request(request):
-    if request.method == "POST":
-        form = AssetrequestForm(request.POST)
-        if form.is_valid():
-            asset_name = form.cleaned_data['asset_name']
-            request_quantity = form.cleaned_data['request_quantity']
-            try:
-                Assetrequest.objects.create(asset_name_id=asset_name, request_quantity=request_quantity, user_id=request.user)
-                print("Saved")
-                return redirect('/requestasset')
-            except Exception as e:
-                print("error ",e)
-                messages.error(request, 'Error: Form not saved')
-                return redirect('/requestasset')
-        else:
-            messages.error(request, 'Error: Form not valid')
-            return redirect('/requestasset')
-    else:
-        form = AssetrequestForm()
-        return render(request, 'requestassetform.html', {'form': form})
+
+
+
 		

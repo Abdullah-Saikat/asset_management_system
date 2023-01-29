@@ -27,6 +27,10 @@ urlpatterns = [
     path('update_status/<int:id>', views.Update_status),
     path('maintenancerequest/',views.maintenancerequest, name='maintenancerequest'),
     path('maintenanceshow',views.maintenanceshow),
+    path('Approvemaintenance/<int:id>', views.Approvemaintenance),
+    path('requestasset/',views.requestasset, name='requestasset'),
+    path('requestshow',views.requestshow, name='requestshow'),
+    path('Approverequest/<int:id>', views.Approverequest),
 
     
 ]

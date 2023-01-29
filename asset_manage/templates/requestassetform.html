@@ -7,28 +7,7 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
-        #customers {
-          font-family: Arial, Helvetica, sans-serif;
-          border-collapse: collapse;
-          width: 100%;
-        }
         
-        #customers td, #customers th {
-          border: 1px solid #ddd;
-          padding: 8px;
-        }
-        
-        #customers tr:nth-child(even){background-color: #f2f2f2;}
-        
-        #customers tr:hover {background-color: #ddd;}
-        
-        #customers th {
-          padding-top: 12px;
-          padding-bottom: 12px;
-          text-align: left;
-          background-color: #04AA6D;
-          color: white;
-        } 
         .nav-link{
             color:white !important
         }
@@ -44,16 +23,19 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-             
+              <li class="nav-item">
+                <a class="nav-link" href="/asset/maintenancerequest">Maintenance request</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/asset/requestasset">Asset Request</a>
+              </li>
                 <li class="nav-item">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                   <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
                 </svg>
 
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/requestasset">Asset Request</a>
-              </li>
+              
               <li class="nav-item">
                 
                 <a class="nav-link active" aria-current="page" href="">{{user.username}}</a>
@@ -72,63 +54,49 @@
           </div>
         </div>
       </nav>
-    <!-- <table class="mt-2" id="customers">
-        <tr>
+      <h3 class="text-center mt-5">Request for Asset</h3>
+
+      <form style= "position: absolute; left: 30%; width: 100rem;" method="POST" class="post-form" action="/asset/requestasset/">
+        {% csrf_token %}
+        <div class="container">
+            <br>
             
-            <th>
-                title
-                
-            </th>
-            <th>
-                price
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-              Quantity
-          </th>
-            <th>
-                Maintenance Date
-            </th>
-        </tr>
-        {% for x in emploo %}
-        <tr>
-            
-            <td>{{ x.title }}</td>
-            <td>{{ x.price }}</td>
-            <td>{{ x.description }}</td>
-            <td>{{ x.asset_quantity }}</td>
-            <td>{{ x.date}}</td>
-        </tr>
-        {% endfor %}
-
-    </table> -->
-
-    <!-- fORM -->
-    <div class="container mt-5">
-      <div class="row justify-content-center">
-        <div class="col-md-7">
-          <h2>Request For Asset</h2>
-
-    <form method="post">
-      {% csrf_token %}
-      <div class="form-group">
-          <label for="title">Asset Title</label>
-          {{form.asset_name}}
-          <!-- <input type="text" class="form-control" id="title" name="asset_name" required> -->
-      </div>
-      <div class="form-group">
-          <label for="quantity">Quantity</label>
-          {{form.request_quantity}}
-          <!-- <input type="number" class="form-control" id="quantity" name="request_quantity" required> -->
-      </div>
-      <input type="hidden" name="username" value="{{ user.username }}">
-      <button type="submit" class="btn btn-primary mt-3">Submit</button>
-    </div>
-  </div>
-</div>
-  </form>
-    <!-- fORM -->
+        
+            <div class="form-group row mb-2">
+                <label class="col-sm-2 col-form-label">Your username:</label>
+                <div class="col-sm-4">
+                {{ form.User_id }}
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <label class="col-sm-2 col-form-label">Asset Name:</label>
+                <div class="col-sm-4">
+                {{ form.asset_name }}
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+              <label class="col-sm-2 col-form-label">Asset quantity:</label>
+              <div class="col-sm-4">
+              {{ form.request_quantity }}
+              </div>
+          </div>
+            <div class="form-group row mb-2">
+              <label class="col-sm-2 col-form-label">Time:</label>
+              <div class="col-sm-4">
+              {{ form.time }}
+              </div>
+          </div>
+            <br>
+            <br>
+            <div class="form-group row">
+                <label class="col-sm-1 col-form-label"></label>
+                <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    
 </body>
 </html>
+

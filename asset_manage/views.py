@@ -1,8 +1,8 @@
 from urllib import request
 from xml.dom.minidom import TypeInfo
 from django.shortcuts import render, redirect
-from .forms import AssetForm,InfoForm,DepartmentForm,ItemForm,CategoryForm,EmployeeinfoForm,AssetstatusForm,MaintenancerequestForm
-from .models import Asset,Assetinfo,Department,Employeeinfo,Category,Item,Assetstatus,Maintenancerequest
+from .forms import AssetForm,InfoForm,DepartmentForm,ItemForm,CategoryForm,EmployeeinfoForm,AssetstatusForm,MaintenancerequestForm,AssetrequestForm
+from .models import Asset,Assetinfo,Department,Employeeinfo,Category,Item,Assetstatus,Maintenancerequest,Assetrequest
 from django.contrib.auth.models import User
 
 
@@ -287,3 +287,40 @@ def maintenanceshow(request):
     print("Product List sorted")
     print(products)
     return render(request, "showmaintenancereq.html", {'employees':products})
+
+def Approvemaintenance(request, id):
+    employee = Maintenancerequest.objects.get(id=id)
+    employee.delete()
+    return redirect("/asset/maintenanceshow")
+
+def requestasset(request):
+    if request.method == "POST":
+        form = AssetrequestForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                print("Saved")
+                return redirect('/asset/requestasset')
+            except:
+                print("Saved problem")
+                pass
+        else:
+            print(form.errors)
+    else:
+        form = AssetrequestForm()
+        return render(request, 'requestassetform.html', {'form': form})
+
+def requestshow(request):
+    products = Assetrequest.objects.all()
+    # products = employees.order_by('date').values()
+    # print("Product List Unsorted")
+    # print(employees)
+    print("Product List sorted")
+    print(products)
+    return render(request, "showrequestasset.html", {'employees':products})
+
+
+def Approverequest(request, id):
+    employee = Assetrequest.objects.get(id=id)
+    employee.delete()
+    return redirect("/asset/requestshow")

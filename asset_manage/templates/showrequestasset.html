@@ -8,6 +8,7 @@
         <th>id</th>
         <th>User name</th>
         <th>Asset name</th>
+        <th>quantity</th>
         <th>Time</th>
         {% if request.user.usertype.user_type == "Admin" %}
         <th>Actions</th>
@@ -20,12 +21,13 @@
 {% for employee in employees %}
     <tr>
         <td>{{ employee.id }}</td>
-        <td>{{ employee.user_name }}</td>
-        <td>{{ employee.Maintenance_name }}</td>
+        <td>{{ employee.User_id }}</td>
+        <td>{{ employee.asset_name }}</td>
+        <td>{{ employee.request_quantity }}</td>
         <td>{{ employee.time }}</td>
         <td>
             
-            <a href="/asset/Approvemaintenance/{{ employee.id }}">Approve</a>
+            <a href="/asset/Approverequest/{{ employee.id }}">Approve</a>
         </td>
     </tr>
 {% endfor %}

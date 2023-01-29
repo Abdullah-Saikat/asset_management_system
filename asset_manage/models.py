@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.timezone import now
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
+from django.utils import timezone
 
 
 
@@ -55,10 +56,11 @@ class Assetstatus(models.Model):
 class Assetrequest(models.Model):
     asset_name= models.ForeignKey(Asset, on_delete=models.CASCADE,default='')
     request_quantity= models.IntegerField(default=0)
-    # User_id=models.ForeignKey(User, on_delete=models.CASCADE)
+    User_id=models.ForeignKey(User, on_delete=models.CASCADE, default='')
+    time = models.DateTimeField(default=timezone.now)
 
 class Maintenancerequest(models.Model):
-    Maintenance_name= models.ForeignKey(Asset, on_delete=models.CASCADE,default='')
-    user_name= models.ForeignKey(User, on_delete=models.CASCADE)
-
+    Maintenance_name = models.ForeignKey(Asset, on_delete=models.CASCADE, default='')
+    user_name = models.ForeignKey(User, on_delete=models.CASCADE)
+    time = models.DateTimeField(default=timezone.now)
     

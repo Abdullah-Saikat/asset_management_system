@@ -52,3 +52,8 @@ class MaintenancerequestForm(forms.ModelForm):
     class Meta:
         model = Maintenancerequest
         fields = "__all__"
+    def __init__(self, *args, **kwargs):
+	    super(MaintenancerequestForm, self).__init__(*args, **kwargs)
+
+	    self.fields['Maintenance_name'].widget.attrs['class'] = 'form-control '
+	    self.fields['user_name'].widget.attrs['class'] = 'form-control'
