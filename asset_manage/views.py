@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from .forms import AssetForm,InfoForm,DepartmentForm,ItemForm,CategoryForm,EmployeeinfoForm,AssetstatusForm,MaintenancerequestForm,AssetrequestForm
 from .models import Asset,Assetinfo,Department,Employeeinfo,Category,Item,Assetstatus,Maintenancerequest,Assetrequest
 from django.contrib.auth.models import User
+from django.contrib import messages 
 
 
 
@@ -267,8 +268,12 @@ def maintenancerequest(request):
         form = MaintenancerequestForm(request.POST)
         if form.is_valid():
             try:
-                form.save()
+                # form.save()
+                data = form.save(commit=False)
+                data.user_name=request.user
+                data.save()
                 print("Saved")
+                messages.success(request, ('Request for maintenance successfully...'))
                 return redirect('/asset/maintenancerequest')
             except:
                 print("Saved problem")
@@ -297,9 +302,15 @@ def requestasset(request):
     if request.method == "POST":
         form = AssetrequestForm(request.POST)
         if form.is_valid():
+            
             try:
-                form.save()
+                # form.save()
+                data = form.save(commit=False)
+                data.User_id=request.user
+                data.save()
+                
                 print("Saved")
+                messages.success(request, ('Request asset successfully...'))
                 return redirect('/asset/requestasset')
             except:
                 print("Saved problem")
